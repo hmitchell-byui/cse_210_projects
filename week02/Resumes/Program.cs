@@ -2,7 +2,7 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         Job job1 = new Job();
         job1._jobTitle = "Software Engineer";
