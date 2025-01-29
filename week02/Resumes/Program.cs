@@ -18,6 +18,12 @@ class Program
         job2._startYear = 2000;
         job2.Display();
 
+        Resume resume = new Resume();
+        resume._name = "Charlie Baker";
+        resume._jobs.Add(job1);
+        resume._jobs.Add(job2);
+
+        resume.Display();
     }
 }
 
