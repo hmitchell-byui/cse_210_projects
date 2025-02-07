@@ -1,16 +1,17 @@
 public class Scripture
 {
     private string _reference;
-    private  List<Word> _words {get; set; }
+    private  List<Word> _words = new List<Word>();
 
     public Scripture()
     {
         _reference = "";
-        // _words = "";
+        foreach (Word word in _words)
+        {word.Display();}
     }
     public Scripture(Reference reference, string text, List<Word> texts)
     {
-        // _reference = reference;
+        _reference = reference;
         _words = texts;
     }
     public int _numberToHide;

@@ -13,14 +13,18 @@ public class Word
     }
     public void Hide()
     {
-
+        _text = "_____";
     }
     public void Show()
     {
-
+        _text = _text;
     }
-    // public bool IsHidden()
-    // {
-
-    // }
+    public bool IsHidden()
+    {
+        
+    }
+    public void Display()
+    {
+        
+    }
 }
