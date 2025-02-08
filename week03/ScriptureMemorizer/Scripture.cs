@@ -1,36 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 public class Scripture
 {
-    private string _reference;
-    private  List<Word> _words = new List<Word>();
+    private string _text;
+    private int _iteration;
+    private int _originalWordCount;
 
-    public Scripture()
+    public string Text
     {
-        _reference = "";
-        foreach (Word word in _words)
-        {word.Display();}
-    }
-    public Scripture(Reference reference, string text, List<Word> texts)
-    {
-        _reference = reference;
-        _words = texts;
-    }
-    public int _numberToHide;
-    public void HideRandomWords()
-    {
-        _numberToHide = 0;
-    }
-    public void HideRandomWords(int numberToHide)
-    {
-        _numberToHide = numberToHide;
-    }
-    public string GetDisplayText()
-    {
-        string text = $"{_reference}";
-        return text;
-    }
-    public bool IsCompletelyHidden()
-    {
-        return true;
+        get { return _text; }
+        set { _text = value; }
     }
 
+    public int Iteration
+    {
+        get { return _iteration; }
+        set { _iteration = value; }
+    }
+
+    public Scripture(string text)
+    {
+        _text = text;
+        _iteration = 1; // Initialize the iteration counter
+        _originalWordCount = Word.GetWords(text).Count; // Calculate original word count
+    }
+
+    public string ReplaceWordsWithUnderscores()
+    {
+        List<string> words = Word.GetWords(_text);
+        int wordsToReplaceCount = (int)Math.Ceiling(_originalWordCount * 0.20 * _iteration);
+        List<int> positionsToReplace = Word.GetWordPositionsToReplace(words, wordsToReplaceCount);
+
+        for (int i = 0; i < words.Count; i++)
+        {
+            if (positionsToReplace.Contains(i))
+            {
+                words[i] = new string('_', words[i].Length);
+            }
+        }
+
+        _iteration++; // Increase the number of words to underscore for the next iteration
+        return string.Join(" ", words);
+    }
 }
+

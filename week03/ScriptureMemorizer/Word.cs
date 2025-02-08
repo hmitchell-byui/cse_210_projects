@@ -1,30 +1,21 @@
+using System.Collections.Generic;
+using System.Linq;
+
 public class Word
 {
-    private string _text;
-    private bool _isHidden;
+    public static List<string> GetWords(string scripture)
+    {
+        return scripture.Split(' ').ToList();
+    }
 
-    public Word()
+    public static List<int> GetWordPositionsToReplace(List<string> words, int numberOfWords)
     {
-        _text = "";
-    }
-    public Word(string text)
-    {
-        _text = text;
-    }
-    public void Hide()
-    {
-        _text = "_____";
-    }
-    public void Show()
-    {
-        _text = _text;
-    }
-    public bool IsHidden()
-    {
-        
-    }
-    public void Display()
-    {
-        
+        Random random = new Random();
+        return words
+            .Select((word, index) => new { word, index })
+            .OrderBy(x => random.Next())
+            .Take(numberOfWords)
+            .Select(x => x.index)
+            .ToList();
     }
 }

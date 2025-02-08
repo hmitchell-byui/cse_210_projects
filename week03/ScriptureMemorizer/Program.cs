@@ -2,36 +2,58 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Get use input for reference and scripture
-        Console.WriteLine("What book of scripture? ");
-        string bookReference = Console.ReadLine();
-        Console.WriteLine("What chapter?");
-        int chapterReference = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter the book:");
+        string book = Console.ReadLine();
 
-        // Conditions for multiple verses
-        Console.WriteLine("How many verses?");
-        int verseCount = int.Parse(Console.ReadLine());
-        if (verseCount > 1)
+        Console.WriteLine("Enter the chapter:");
+        int chapter = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter the starting verse:");
+        int startVerse = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter the ending verse (leave blank if same as start verse):");
+        string endVerseInput = Console.ReadLine();
+        int endVerse = string.IsNullOrEmpty(endVerseInput) ? startVerse : int.Parse(endVerseInput);
+
+        Console.WriteLine("Enter the scripture text:");
+        string scriptureText = Console.ReadLine();
+
+        // Clear user input
+        Console.Clear();
+
+        // Store reference and scripture
+        Reference reference = new Reference(book, chapter, startVerse, endVerse);
+        Scripture scripture = new Scripture(scriptureText);
+
+        while (true)
         {
-            Console.WriteLine("Starting verse:");
-            int startVerse = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ending verse: ");
-            int endVerse = int.Parse(Console.ReadLine());
-            return Reference(bookReference, chapterReference, startVerse, endVerse);
+            // Replace an increasing number of words with each iteration
+            string modifiedScripture = scripture.ReplaceWordsWithUnderscores();
+
+            // Display modified scripture and reference
+            Console.WriteLine("Modified Scripture:");
+            Console.WriteLine(modifiedScripture);
+            Console.WriteLine($"Reference: {reference}");
+
+            // Check if all words have been replaced
+            if (modifiedScripture.Replace(" ", "").Replace("_", "").Length == 0)
+            {
+                Console.WriteLine("All words have been replaced.");
+                break;
+            }
+
+            // Ask user if they want to continue or quit
+            Console.WriteLine("Type 'quit' to exit or press Enter to continue:");
+            string userInput = Console.ReadLine();
+            if (userInput.ToLower() == "quit")
+            {
+                break;
+            }
+
+            // Clear the console for the next iteration
+            Console.Clear();
         }
-        else
-        {
-            Console.WriteLine("What verse?");
-            int verse = int.Parse(Console.ReadLine());
-        }
-
-        
-        
-        Console.WriteLine("Please type out the scripture or copy and paste it here.");
-        string scripture = Console.ReadLine();
-
-
     }
 }

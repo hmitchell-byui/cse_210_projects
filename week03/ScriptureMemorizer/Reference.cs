@@ -1,49 +1,52 @@
-using System.Security.Cryptography.X509Certificates;
-
 public class Reference
 {
     private string _book;
     private int _chapter;
-    private int _verse;
+    private int _startVerse;
     private int _endVerse;
-    private string _reference;
 
-    public Reference()
+    public string Book
     {
-        _book = "Book";
-        _chapter = 1;
-        _verse = 1;
-        _endVerse = 1;
-        string reference = $"{_book} {_chapter}: {_verse}";
+        get { return _book; }
+        set { _book = value; }
     }
-    public Reference(string book, int chapter, int verse)
+
+    public int Chapter
+    {
+        get { return _chapter; }
+        set { _chapter = value; }
+    }
+
+    public int StartVerse
+    {
+        get { return _startVerse; }
+        set { _startVerse = value; }
+    }
+
+    public int EndVerse
+    {
+        get { return _endVerse; }
+        set { _endVerse = value; }
+    }
+
+    public Reference(string book, int chapter, int startVerse, int endVerse = -1)
     {
         _book = book;
         _chapter = chapter;
-        _verse = verse;
-        _endVerse = verse;
-        string reference = $"{_book} {_chapter}: {_verse}";
+        _startVerse = startVerse;
+        _endVerse = endVerse > startVerse ? endVerse : startVerse; // Default to startVerse if endVerse is not provided or invalid
     }
-    public Reference(string book, int chapter, int startVerse, int endVerse)
+
+    public override string ToString()
     {
-        _book = book;
-        _chapter = chapter;
-        _verse = startVerse;
-        _endVerse = endVerse;
-        string reference = $"{_book} {_chapter}: {_verse}-{endVerse}";
-    }
-    public string GetReference()
-    {
-        if (_endVerse == _verse)
+        if (_startVerse == _endVerse)
         {
-            string referenceText = $"{_book} {_chapter}: {_verse}";
-            return referenceText;
+            return $"{Book} {Chapter}:{StartVerse}";
         }
-        else 
+        else
         {
-            string referenceText = $"{_book} {_chapter}: {_verse}-{_endVerse}";
-            return referenceText;
+            return $"{Book} {Chapter}:{StartVerse}-{EndVerse}";
         }
-        
     }
 }
+
