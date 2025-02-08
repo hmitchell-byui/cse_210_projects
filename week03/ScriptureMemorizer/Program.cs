@@ -8,7 +8,7 @@ class Program
         Console.WriteLine("Do you want to input your own scripture or select from the database? (input/select)");
         string choice = Console.ReadLine().ToLower();
 
-        Ref reference;
+        Reference reference;
         Scripture scripture;
 
         if (choice == "select")
@@ -80,7 +80,7 @@ class Program
             Console.Clear();
 
             // Store reference and scripture
-            reference = new Ref(bookName, chapterNum, startVerse, endVerse);
+            reference = new Reference(bookName, chapterNum, startVerse, endVerse);
             scripture = new Scripture(scriptureText);
         }
 

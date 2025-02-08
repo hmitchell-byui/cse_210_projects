@@ -1,4 +1,4 @@
-public class Ref
+public class Reference
 {
     private string _bookName;
     private int _chapterNum;
@@ -29,12 +29,19 @@ public class Ref
         set { _endVerse = value; }
     }
 
-    public Ref(string bookName, int chapterNum, int startVerse, int endVerse = -1)
+    public Reference(string bookName, int chapterNum, int startVerse, int endVerse = -1)
     {
         _bookName = bookName;
         _chapterNum = chapterNum;
         _startVerse = startVerse;
-        _endVerse = endVerse > startVerse ? endVerse : startVerse; // Default to startVerse if endVerse is not provided or invalid
+        if (endVerse > startVerse)
+        {
+            _endVerse = endVerse;
+        }
+else
+{
+    _endVerse = startVerse;
+}
     }
 
     public override string ToString()

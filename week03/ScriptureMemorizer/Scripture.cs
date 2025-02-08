@@ -4,14 +4,14 @@ using System.Linq;
 
 public class Scripture
 {
-    private string _scriptureText;
+    private string _text;
     private int _iterationCount;
     private int _originalWordCount;
 
-    public string ScriptureText
+    public string Text
     {
-        get { return _scriptureText; }
-        set { _scriptureText = value; }
+        get { return _text; }
+        set { _text = value; }
     }
 
     public int IterationCount
@@ -22,14 +22,14 @@ public class Scripture
 
     public Scripture(string text)
     {
-        _scriptureText = text;
+        _text = text;
         _iterationCount = 1; // Initialize the iteration counter
         _originalWordCount = Word.GetWords(text).Count; // Calculate original word count
     }
 
     public string ReplaceWords()
     {
-        List<string> words = Word.GetWords(_scriptureText);
+        List<string> words = Word.GetWords(_text);
         int wordCount = (int)Math.Ceiling(_originalWordCount * 0.25 * _iterationCount);
         List<int> positions = Word.GetPositions(words, wordCount);
 
