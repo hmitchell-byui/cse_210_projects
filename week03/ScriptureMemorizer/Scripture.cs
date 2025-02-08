@@ -4,45 +4,44 @@ using System.Linq;
 
 public class Scripture
 {
-    private string _text;
-    private int _iteration;
+    private string _scriptureText;
+    private int _iterationCount;
     private int _originalWordCount;
 
-    public string Text
+    public string ScriptureText
     {
-        get { return _text; }
-        set { _text = value; }
+        get { return _scriptureText; }
+        set { _scriptureText = value; }
     }
 
-    public int Iteration
+    public int IterationCount
     {
-        get { return _iteration; }
-        set { _iteration = value; }
+        get { return _iterationCount; }
+        set { _iterationCount = value; }
     }
 
     public Scripture(string text)
     {
-        _text = text;
-        _iteration = 1; // Initialize the iteration counter
+        _scriptureText = text;
+        _iterationCount = 1; // Initialize the iteration counter
         _originalWordCount = Word.GetWords(text).Count; // Calculate original word count
     }
 
-    public string ReplaceWordsWithUnderscores()
+    public string ReplaceWords()
     {
-        List<string> words = Word.GetWords(_text);
-        int wordsToReplaceCount = (int)Math.Ceiling(_originalWordCount * 0.20 * _iteration);
-        List<int> positionsToReplace = Word.GetWordPositionsToReplace(words, wordsToReplaceCount);
+        List<string> words = Word.GetWords(_scriptureText);
+        int wordCount = (int)Math.Ceiling(_originalWordCount * 0.25 * _iterationCount);
+        List<int> positions = Word.GetPositions(words, wordCount);
 
         for (int i = 0; i < words.Count; i++)
         {
-            if (positionsToReplace.Contains(i))
+            if (positions.Contains(i))
             {
                 words[i] = new string('_', words[i].Length);
             }
         }
 
-        _iteration++; // Increase the number of words to underscore for the next iteration
+        _iterationCount++; // Increase the number of words to underscore for the next iteration
         return string.Join(" ", words);
     }
 }
-

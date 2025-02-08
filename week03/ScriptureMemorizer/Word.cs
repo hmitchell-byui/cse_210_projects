@@ -3,18 +3,18 @@ using System.Linq;
 
 public class Word
 {
-    public static List<string> GetWords(string scripture)
+    public static List<string> GetWords(string text)
     {
-        return scripture.Split(' ').ToList();
+        return text.Split(' ').ToList();
     }
 
-    public static List<int> GetWordPositionsToReplace(List<string> words, int numberOfWords)
+    public static List<int> GetPositions(List<string> words, int count)
     {
-        Random random = new Random();
+        Random rand = new Random();
         return words
             .Select((word, index) => new { word, index })
-            .OrderBy(x => random.Next())
-            .Take(numberOfWords)
+            .OrderBy(x => rand.Next())
+            .Take(count)
             .Select(x => x.index)
             .ToList();
     }

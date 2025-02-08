@@ -1,20 +1,20 @@
-public class Reference
+public class Ref
 {
-    private string _book;
-    private int _chapter;
+    private string _bookName;
+    private int _chapterNum;
     private int _startVerse;
     private int _endVerse;
 
-    public string Book
+    public string BookName
     {
-        get { return _book; }
-        set { _book = value; }
+        get { return _bookName; }
+        set { _bookName = value; }
     }
 
-    public int Chapter
+    public int ChapterNum
     {
-        get { return _chapter; }
-        set { _chapter = value; }
+        get { return _chapterNum; }
+        set { _chapterNum = value; }
     }
 
     public int StartVerse
@@ -29,10 +29,10 @@ public class Reference
         set { _endVerse = value; }
     }
 
-    public Reference(string book, int chapter, int startVerse, int endVerse = -1)
+    public Ref(string bookName, int chapterNum, int startVerse, int endVerse = -1)
     {
-        _book = book;
-        _chapter = chapter;
+        _bookName = bookName;
+        _chapterNum = chapterNum;
         _startVerse = startVerse;
         _endVerse = endVerse > startVerse ? endVerse : startVerse; // Default to startVerse if endVerse is not provided or invalid
     }
@@ -41,12 +41,11 @@ public class Reference
     {
         if (_startVerse == _endVerse)
         {
-            return $"{Book} {Chapter}:{StartVerse}";
+            return $"{BookName} {ChapterNum}:{StartVerse}";
         }
         else
         {
-            return $"{Book} {Chapter}:{StartVerse}-{EndVerse}";
+            return $"{BookName} {ChapterNum}:{StartVerse}-{EndVerse}";
         }
     }
 }
-
