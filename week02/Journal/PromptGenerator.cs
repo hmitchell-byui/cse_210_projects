@@ -3,6 +3,7 @@ using System;
 public class PromptGenerator
 {
     public string _prompt;
+
     public void GetPrompt()
     {
         string[] prompts = {
@@ -16,9 +17,9 @@ public class PromptGenerator
 
         Random random = new Random();
         int index = random.Next(prompts.Length);
-
-    
+        
+        _prompt = prompts[index];
         Console.WriteLine("Your writing prompt is:");
-        Console.WriteLine(prompts[index]);
+        Console.WriteLine(_prompt);
     }
 }

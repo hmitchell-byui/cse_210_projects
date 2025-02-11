@@ -10,9 +10,11 @@ class Program
 
         Reference reference;
         Scripture scripture;
+        
 
         if (choice == "select")
-        {
+        {   
+            Console.Clear();
             var scripturesByCategory = selection.GetScriptureData();
             Console.WriteLine("Select a category from the following options:");
 
@@ -22,12 +24,12 @@ class Program
                 Console.WriteLine($"{categoryIndex}. {category}");
                 categoryIndex++;
             }
-
             Console.WriteLine("Enter the number of your choice:");
             int selectedCategoryNumber = int.Parse(Console.ReadLine()) - 1;
 
             if (selectedCategoryNumber >= 0 && selectedCategoryNumber < scripturesByCategory.Count)
             {
+                Console.Clear();
                 var selectedCategory = new List<string>(scripturesByCategory.Keys)[selectedCategoryNumber];
                 var scriptures = scripturesByCategory[selectedCategory];
                 Console.WriteLine($"Select a scripture from the category {selectedCategory}:");
@@ -43,6 +45,7 @@ class Program
 
                 if (selectedScriptureNumber >= 0 && selectedScriptureNumber < scriptures.Count)
                 {
+                    Console.Clear();
                     reference = scriptures[selectedScriptureNumber].reference;
                     scripture = new Scripture(scriptures[selectedScriptureNumber].scripture);
                 }
