@@ -1,33 +1,56 @@
-using System;
-using System.Collections.Generic;
-
 public class Activity
 {
     protected string _name;
     protected string _description;
     protected int _duration;
 
-    public Activity()
+    public int Duration
     {
+        get { return _duration; }
+        set { _duration = value; }
+    }
+
+    public string GetName()
+    {
+        return _name;
     }
 
     public void DisplayStartingMessage()
     {
-        // Implementation here
+        Console.WriteLine($"Welcome to {_name}.");
+        Console.WriteLine($"Let's {_description} for {_duration} seconds.");
     }
 
     public void DisplayEndingMessage()
     {
-        // Implementation here
+        Console.WriteLine("\nGreat job! You have completed the activity.");
+        ShowSpinner(3);
     }
 
     public void ShowSpinner(int seconds)
     {
-        // Implementation here
+        string[] spinner = { "|", "/", "-", "\\" };
+        for (int i = 0; i < seconds * 4; i++)
+        {
+            Console.Write(spinner[i % 4]);
+            System.Threading.Thread.Sleep(250);
+            Console.Write("\b");
+        }
     }
 
     public void ShowCountDown(int seconds)
     {
-        // Implementation here
+        for (int i = seconds; i > 0; i--)
+        {
+            Console.Write(i + " ");
+            System.Threading.Thread.Sleep(1000);
+            Console.Write("\b\b");
+        }
+        Console.WriteLine();
+    }
+
+    public virtual void Run()
+    {
+        Console.WriteLine("Running the activity...");
     }
 }
