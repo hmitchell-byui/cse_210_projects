@@ -10,14 +10,11 @@ public abstract class Goal
         _description = description;
         _points = points;
     }
+
+    public string Point => _points;
+
     public abstract void RecordEvent();
-
     public abstract bool IsComplete();
-
-    public virtual string GetDetailsString()
-    {
-        return _description;
-    }
-
+    public abstract string GetDetailsString();
     public abstract string GetStringRepresentation();
 }
